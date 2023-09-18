@@ -7,26 +7,19 @@ const findSum = function(array) {
   };
 
 const findFrequency = function(array) {
-  const frequencyCount = {};
-  let mostFrequentItem = array[0];
-  let leastFrequentItem = array[0];
+  const count = {}; 
 
-  for (let i = 0; i < array.length; i++) {
-    const item = array[i];
-    frequencyCount[item] = (frequencyCount[item] || 0) + 1;
-
-    if (frequencyCount[item] > frequencyCount[mostFrequentItem]) {
-      mostFrequentItem = item;
-    }
-
-    if (frequencyCount[item] < frequencyCount[leastFrequentItem] || 
-        (frequencyCount[item] === frequencyCount[leastFrequentItem] && 
-         item.length > leastFrequentItem.length)) {
-      leastFrequentItem = item;
-    }
+  for (const item of array) {
+    count[item] = (count[item] || 0) + 1;
   }
 
-  return { most: mostFrequentItem, least: leastFrequentItem };
+  const sortedByFrequency = Object.keys(count).sort((a, b) => count[b] - count[a]);
+
+  const mostFrequent = sortedByFrequency[0];
+  const leastFrequent = sortedByFrequency[sortedByFrequency.length - 1];
+
+  return { most: mostFrequent, least: leastFrequent };
+};
 
 const isPalindrome = function(str){
     str = str.toLowerCase();
